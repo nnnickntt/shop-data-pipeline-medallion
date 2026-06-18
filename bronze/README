@@ -11,7 +11,7 @@ The Bronze layer serves as the entry point of the **Medallion Architecture**. It
 
 ---
 
-## 📂 Implementation Approaches
+## 📂 Implementation
 
 Inside the Bronze directory, the pipeline is designed and implemented using 3 different development methodologies:
 
