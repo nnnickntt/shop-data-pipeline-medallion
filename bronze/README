@@ -1,1 +1,34 @@
+## 🥉 Bronze Layer: Data Ingestion Pipeline
 
+The Bronze layer serves as the entry point of the **Medallion Architecture**. It ingests raw shop data from an external file storage (CSV format in Databricks Volume) and safely stores it into a managed table to prepare for subsequent data cleansing in the Silver layer.
+
+---
+
+## 🚀 Key Highlights
+
+* **Automated Audit Columns:** Implements system tracking by extracting hidden file metadata using Spark's `_metadata` context. Each row is enriched with control columns such as `_load_dt`, `_load_dttm`, `_file_name`, and `_file_size` to ensure bulletproof **Data Lineage** and auditability.
+* **3-Tier Code Evolution:** Demonstrates software engineering maturity by evolving code across three distinct structural design patterns: Standard, Dynamic, and Framework-driven.
+
+---
+
+## 📂 Implementation Approaches
+
+Inside the Bronze directory, the pipeline is designed and implemented using 3 different development methodologies:
+
+### 1. Standard Approach (`Bronze.py`)
+* **Description:** A straightforward, declarative script where file paths and table destinations are hardcoded. It is optimized for the initial Proof of Concept (POC) and quick exploration of raw data structures.
+
+### 2. Dynamic Approach (`Bronze_Dynamic.py`)
+* **Description:** Introduces modularity by decoupling configuration parameters (e.g., `delimiter`, `raw_path`, `write_mode`) from the main execution logic. This allows easy configuration adjustments from a single block at the top of the script without rewriting core PySpark logic.
+
+### 3. Framework-Driven Approach (`Bronze_Framework.py`)
+* **Description:** A production-grade architecture leveraging **Object-Oriented Programming (OOP)** through Python's `@dataclass`. 
+* **Key Advantage:** It features automated file extension detection (`.split('.')[-1]`) to dynamically resolve the appropriate Spark format reader. This highly reusable and scalable class can be instantly instantiated to onboard new data pipelines with zero code duplication.
+
+---
+
+## 🛠️ Technical Workflow
+
+1.  **Extract:** Spark DataFrame Reader fetches raw pipe-delimited (`|`) CSV text files from Databricks Volumes.
+2.  **Transform (Metadata Enrichment):** Enriches the DataFrame with file metadata (e.g., file name, path, and size) using `.withColumn()`.
+3.  **Load:** Persists data to the Databricks Metastore as a Managed Table using `overwrite` mode.
