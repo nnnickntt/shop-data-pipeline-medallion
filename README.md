@@ -5,7 +5,8 @@ A Databricks-based PySpark pipeline executing Medallion Architecture across 3 pa
 ---
 
 ## 📂 Repository Structure
-
+* **📄 ddl.py** - Script to create Schema and Volume for storing raw files
+* **📄 lib.py** - Centralized library for common functions, utilities, and configurations
 * **🥉 [bronze](./bronze)** - Data Ingestion Pipeline (Contains 3 approach scripts: Standard, Dynamic, and OOP Framework)
 * ⏳ *silver (Coming Soon)* - Data Cleansing & Quality Audit Framework using Left Anti Join
 * ⏳ *gold (Coming Soon)* - Data Aggregation & Business Layer
